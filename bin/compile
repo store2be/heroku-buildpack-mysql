@@ -1,16 +1,28 @@
-#!/usr/bin/env bash
+#!/bin/sh
 echo "------> Installing Mysql 5.1"
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
-cd $BUILD_DIR
-# download the minimal mysql tar file
+indent() {
+  sed -u 's/^/       /'
+}
+
 echo "------> Downloading minimized tarball"
-wget https://raw.githubusercontent.com/gaumire/mysql-binary/master/mysql.tar.gz
+cd $CACHE_DIR
+# download the minimal mysql tar file
+wget -nv -N https://raw.githubusercontent.com/din-co/mysql-binary/master/mysql.tar.gz
+
+cd $BUILD_DIR
 # make a directory to untar (like unzip) the binary
-mkdir -p $BUILD_DIR/.heroku/vendor/mysql
+mkdir -p $BUILD_DIR/mysql
 # untar the binary to a directory inside /app/.heroku
-tar -C $BUILD_DIR/.heroku/vendor/mysql -xvf mysql.tar.gz
-# remove the tar file
-rm -f mysql.tar.gz
+tar -C $BUILD_DIR/mysql -xvf $CACHE_DIR/mysql.tar.gz | indent
+# Ensure binaries are in PATH and libraries are in LD_LIBRARY_PATH
+cat > .profile.d/mysql <<EOF
+# Add mysql binaries to PATH
+export PATH=$PATH:$BUILD_DIR/mysql/bin
+# Add mysql libraries to shared library search paths
+export LIBRARY_PATH=$LIBRARY_PATH:$BUILD_DIR/mysql/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/mysql/lib
+EOF
