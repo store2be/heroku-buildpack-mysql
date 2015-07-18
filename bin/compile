@@ -20,7 +20,6 @@ mkdir -p $BUILD_DIR/mysql
 tar -C $BUILD_DIR/mysql -xvf $CACHE_DIR/mysql.tar.gz | indent
 # Ensure binaries are in PATH and libraries are in LD_LIBRARY_PATH
 cat > .profile.d/mysql.sh <<EOF
-export PATH=$PATH:$BUILD_DIR/mysql/bin
-export LIBRARY_PATH=$LIBRARY_PATH:$BUILD_DIR/mysql/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/mysql/lib
+export PATH=$PATH:/app/mysql/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/app/mysql/lib
 EOF
