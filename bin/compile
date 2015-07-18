@@ -11,7 +11,7 @@ indent() {
 echo "-----> Downloading minimized tarball"
 cd $CACHE_DIR
 # download the minimal mysql tar file
-wget -nv https://raw.githubusercontent.com/din-co/mysql-binary/master/mysql.tar.gz | indent
+wget -nv https://raw.githubusercontent.com/din-co/mysql-binary/master/mysql.tar.gz 2>&1 | indent
 
 cd $BUILD_DIR
 # make a directory to untar (like unzip) the binary
@@ -19,10 +19,8 @@ mkdir -p $BUILD_DIR/mysql
 # untar the binary to a directory inside /app/.heroku
 tar -C $BUILD_DIR/mysql -xvf $CACHE_DIR/mysql.tar.gz | indent
 # Ensure binaries are in PATH and libraries are in LD_LIBRARY_PATH
-cat > .profile.d/mysql <<EOF
-# Add mysql binaries to PATH
+cat > .profile.d/mysql.sh <<EOF
 export PATH=$PATH:$BUILD_DIR/mysql/bin
-# Add mysql libraries to shared library search paths
 export LIBRARY_PATH=$LIBRARY_PATH:$BUILD_DIR/mysql/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/mysql/lib
 EOF
