@@ -10,7 +10,7 @@ indent() {
 
 echo "-----> Downloading minimized tarball"
 # download the minimal mysql tar file
-wget -nv https://raw.githubusercontent.com/din-co/mysql-binary/master/mysql.tar.gz 2>&1 | indent
+wget -nv https://raw.githubusercontent.com/store2be/mysql-binary/master/mysql.tar.gz 2>&1 | indent
 
 # make a directory to untar the binary
 mkdir -p $BUILD_DIR/mysql

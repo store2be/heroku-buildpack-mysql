@@ -10,18 +10,18 @@ Usage
 
 Example usage:
 
-    $ heroku buildpacks:add https://github.com/din-co/heroku-buildpack-mysql
+    $ heroku buildpacks:add https://github.com/store2be/heroku-buildpack-mysql
 
     $ git push heroku master
     ...
     remote: Compressing source files... done.
     remote: Building source:
-    remote: 
+    remote:
     remote: -----> Fetching custom git buildpack... done
     remote: -----> Mysql 5.1 app detected
     remote: -----> Installing Mysql 5.1
     remote: -----> Downloading minimized tarball
-    remote: --2015-06-13 05:09:14--  https://raw.githubusercontent.com/din-co/mysql-binary/master/mysql.tar.gz
+    remote: --2015-06-13 05:09:14--  https://raw.githubusercontent.com/store2be/mysql-binary/master/mysql.tar.gz
     remote: Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 199.27.76.133
     remote: Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|199.27.76.133|:443... connected.
     remote: HTTP request sent, awaiting response... 200 OK
